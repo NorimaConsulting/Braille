@@ -6,14 +6,14 @@ child = require('child_process');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Braille Trail' });
 });
 
 
 router.get('/create', function(req, res, next) {
 
   var text = req.query.text
-  
+
 
   var plaque_length = ""
   var plaque_width = ""
