@@ -3,3 +3,17 @@ body {
 
 a {
 }
+
+
+#logo-container img{
+  height:4em;
+}
+
+nav#headerNav {
+  height:7.5em;
+}
+
+img#norimaLogo{
+    height: 6em;
+    margin: 0.6em;
+}
