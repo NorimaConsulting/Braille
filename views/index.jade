@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  nav.light-blue.lighten-1(role='navigation')
+    .nav-wrapper.container
+      a#logo-container.brand-logo(href='#') Braille Trail
+      ul.right.hide-on-med-and-down
+        li
+          a(href='http://norimainnovations.com') Norima Innovations
+      ul#nav-mobile.side-nav
+        li
+          a(href='#') Navbar Link
+      a.button-collapse(href='#', data-activates='nav-mobile')
+        i.material-icons menu
+  #index-banner.section.no-pad-bot
+    .container
+      br
+      br
+      h2.header.center.orange-text Get Started
+
+      .row
+        form.col.s12
+          .row
+            .input-field.col.s12.m6.offset-m3
+              i.material-icons.prefix mode_edit
+              textarea#inputText.materialize-textarea.checkForInput
+              label(for='inputText') Sign Text
+          .row
+            .input-field.col.s12.m3.offset-m3
+              label() Options
+          .row
+            .input-field.col.s12.m3.offset-m3
+              label Font Size
+              br
+              p
+                input#smallFont(name='size', type='radio' value='s').checkForInput
+                label(for='smallFont') Small
+              p
+                input#mediumFont(name='size', type='radio' value='m').checkForInput
+                label(for='mediumFont') Medium
+              p
+                input#largeFont(name='size', type='radio' value='l').checkForInput
+                label(for='largeFont') Large
+
+            .input-field.col.s3
+              label Back Side Options
+              br
+              p
+                input#backNone(name='backPlate', type='radio' value='none').checkForInput
+                label(for='backNone') None
+              p
+                input#backKeyHole(name='backPlate', type='radio' value='keyHole').checkForInput
+                label(for='backKeyHole') Key Hole
+      .row.center
+        a#download-button.btn-large.waves-effect.waves-light.orange.disabled Download
+
+
+      br
+      br
+
+  footer.page-footer.orange
+    .container
+      .row
+        .col.l6.s12
+          h5.white-text  Bio
+          p.grey-text.text-lighten-4
+            | We are a small team of software developers who love to solve difficult problems. This project was built across two company hack days in 2016. This project was envisioned by Seth Ruf.
+    .footer-copyright
+      .container
+        | Made by&nbsp;
+        a.orange-text.text-lighten-3(href='http://norimainnovations.com') Norima Innovations
+    script(src='/javascripts/index.js')

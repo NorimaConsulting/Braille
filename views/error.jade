@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  h1.header.center.orange-text Braille Trail Fail
+  h2= error.status
+  pre #{error.stack}
