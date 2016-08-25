@@ -19,10 +19,14 @@ $(document).ready(function() {
 
       var fileName = text + ".stl"
 
-      var URL = "/create?text="+text+"&fontSize="+fontSize+"&backPlate=" + backPlate + ""
-
+      var URL = "/create"
+      var data = {
+        "text":encodeURIComponent(text),
+        "fontSize":fontSize,
+        "backPlate":backPlate
+      }
       Materialize.toast('Downloading...', 4000)
-      $.get( URL, function( data ) {
+      $.get( URL,data, function( data ) {
         download(data, fileName);
       }).error(function(err) {
         Materialize.toast('Failed to Download', 4000)
