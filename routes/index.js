@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
+// var spawn = require('child_process').spawn;
 
 child = require('child_process');
+
+var modulesDirectory = __dirname + "/../modules/"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,7 +17,6 @@ router.get('/create', function(req, res, next) {
 
   var text = req.query.text
   
-
   var plaque_length = ""
   var plaque_width = ""
   var plaque_height = ""
@@ -26,15 +28,36 @@ router.get('/create', function(req, res, next) {
   var y_space = ""
 
   var dot_diameter = ""
-  var dot_stl_path = './DefaultMeshes/dot.stl'
-  var plaque_stl_path= './DefaultMeshes/plaque.stl'
 
+  var cmd = 'python3 ' + modulesDirectory + 'braille/stlGenerator.py --text "' + text + '"';
+  console.log(cmd)
+  exec(cmd, {encoding: 'base64', maxBuffer: 5000 * 1024}, function(error, stdout, stderr) {
+    if (error) {
+      console.log(stderr);
+      res.status(500).send();
+    }
+    else {
+      res.send(stdout);
+    }
+  });
+  
+  // var braille_converter = spawn("python3", [modulesDirectory + 'braille/stlGenerator.py', '--text', '"' + text + '"'])
 
+  // var payload = null;
+  // var error = false;
 
-  var cmd = 'python ~/builder/builder.py ';
-    exec(cmd, {encoding: 'binary', maxBuffer: 5000*1024}, function(error, stdout) {
-      res.send(new Buffer(stdout, 'binary'));
-    });
+  // braille_converter.stdout.on('data', function (data) {
+  //   payload = new Buffer(data, 'ascii');
+  // });
+
+  // braille_converter.stderr.on('data', function (data) {
+  //   console.log("ERROR: " + data);
+  //   error = true;
+  // });
+
+  // braille_converter.on('close', function (code) {
+  //   error ? res.status(500).send() : res.send(payload);
+  // });
 
 });
 

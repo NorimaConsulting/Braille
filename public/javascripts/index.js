@@ -23,7 +23,9 @@ $(document).ready(function() {
 
       Materialize.toast('Downloading...', 4000)
       $.get( URL, function( data ) {
-        download(data, fileName);
+        test_blob = convertBase64ToBlob(data, "application/sla")
+
+        download(test_blob, fileName)
       }).error(function(err) {
         Materialize.toast('Failed to Download', 4000)
       });
@@ -32,6 +34,30 @@ $(document).ready(function() {
   });
 
 });
+
+function convertBase64ToBlob (base64String, contentType) {
+  contentType = contentType || '';
+  var sliceSize = 512;
+
+  var byteCharacters = atob(base64String);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
+  }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
 
 
 
